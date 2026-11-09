@@ -38,14 +38,14 @@ nav.light{color:var(--ink)}
 /* journey */
 #journey{position:relative;height:760vh}
 #stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden}
-#stage canvas{position:absolute;inset:0;width:100%;height:100%}
+#stage canvas{position:absolute;inset:0;width:100%;height:100%;transform:translateZ(0)}
 #vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.55) 100%),linear-gradient(to top,rgba(0,0,0,.55),transparent 40%)}
-#whiteout{position:absolute;inset:0;background:var(--cream);opacity:0;pointer-events:none}
+#whiteout{position:absolute;inset:0;background:var(--cream);opacity:0;pointer-events:none;will-change:opacity}
 
-.chapter{position:absolute;left:5vw;bottom:13vh;max-width:640px;opacity:0;will-change:opacity,transform,filter;pointer-events:none}
+.chapter{position:absolute;left:5vw;bottom:13vh;max-width:640px;opacity:0;visibility:hidden;will-change:opacity,transform;pointer-events:none}
 .chapter .k{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.8;margin-bottom:18px}
 .chapter .k::before{content:"";width:28px;height:1px;background:var(--o)}
-.chapter h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(54px,8.4vw,128px);line-height:.88;letter-spacing:-.02em;text-shadow:0 4px 40px rgba(0,0,0,.45)}
+.chapter h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(54px,8.4vw,128px);line-height:.88;letter-spacing:-.02em;text-shadow:0 2px 18px rgba(0,0,0,.35)}
 .chapter h2 em{color:var(--o);font-style:italic}
 .chapter p{margin-top:22px;font-size:16px;line-height:1.6;opacity:.82;max-width:420px}
 .chapter.dark{color:var(--ink)} .chapter.dark h2{text-shadow:none}
@@ -59,7 +59,7 @@ nav.light{color:var(--ink)}
 #hint{position:absolute;left:50%;bottom:5vh;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;opacity:.8;transition:opacity .5s}
 #hint i{width:1px;height:46px;background:linear-gradient(var(--o),transparent);animation:drip 2s infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-#progress{position:absolute;left:0;bottom:0;height:2px;background:var(--o);width:0}
+#progress{position:absolute;left:0;bottom:0;height:2px;background:var(--o);width:100%;transform:scaleX(0);transform-origin:left;will-change:transform}
 
 /* light sections */
 .light-zone{background:var(--cream);color:var(--ink);position:relative;z-index:2}
@@ -242,75 +242,77 @@ footer{background:var(--ink);color:#8d877f;display:flex;justify-content:space-be
 <script>
 (() => {
   const N = 300, frames = new Array(N);
-  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
-  const journey = document.getElementById('journey');
-  const chapters = [...document.querySelectorAll('.chapter')];
-  const rail = [...document.querySelectorAll('#rail div')];
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d', { alpha: false });
+  const journey = document.getElementById('journey'), lzEl = document.getElementById('lightzone');
+  const chapters = [...document.querySelectorAll('.chapter')].map(el => ({ el, a: +el.dataset.in, b: +el.dataset.out, o: -1, y: 0 }));
+  const rail = [...document.querySelectorAll('#rail div')], railBox = rail[0].parentElement;
   const hint = document.getElementById('hint'), wo = document.getElementById('whiteout'), prog = document.getElementById('progress'), nav = document.getElementById('nav');
-  let loaded = 0, cur = 0, target = 0, lastDrawn = -1;
+  let loaded = 0, cur = 0, drawnAt = -1, jTop = 0, jLen = 1, lzTop = 0, lzBottom = 0, vh = innerHeight;
+  let lastRail = -2, lastNav = null, lastRailDark = null;
 
-  function size() {
-    const d = Math.min(window.devicePixelRatio || 1, 2);
-    cv.width = innerWidth * d; cv.height = innerHeight * d; lastDrawn = -1;
+  function measure() {
+    vh = innerHeight;
+    // the frames are 1280px wide; a bigger backing canvas only costs time
+    const scale = Math.min(window.devicePixelRatio || 1, 1600 / innerWidth, 1.5);
+    cv.width = Math.round(innerWidth * scale); cv.height = Math.round(innerHeight * scale);
+    jTop = journey.getBoundingClientRect().top + scrollY; jLen = journey.offsetHeight - vh;
+    const r = lzEl.getBoundingClientRect(); lzTop = r.top + scrollY; lzBottom = r.bottom + scrollY;
+    drawnAt = -1;
   }
-  function draw(i) {
-    let img = frames[i];
-    if (!img || !img.complete) { for (let k = 1; k < N; k++) { const a = frames[i - k], b = frames[i + k]; if (a && a.complete) { img = a; break; } if (b && b.complete) { img = b; break; } } }
-    if (!img || !img.complete) return;
-    const s = Math.max(cv.width / img.naturalWidth, cv.height / img.naturalHeight);
-    const w = img.naturalWidth * s, h = img.naturalHeight * s;
-    ctx.drawImage(img, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+  function blit(bm, alpha) {
+    const s = Math.max(cv.width / bm.width, cv.height / bm.height), w = bm.width * s, h = bm.height * s;
+    ctx.globalAlpha = alpha; ctx.drawImage(bm, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+  }
+  function nearest(i) { if (frames[i]) return i; for (let k = 1; k < N; k++) { if (frames[i - k]) return i - k; if (frames[i + k]) return i + k; } return -1; }
+  function draw(pos) {
+    const i0 = Math.floor(pos), f = pos - i0;
+    const a = nearest(i0); if (a < 0) return;
+    blit(frames[a], 1);
+    // blend toward the next frame so motion is continuous between the 300 renders
+    if (f > 0.04 && a === i0 && frames[i0 + 1]) blit(frames[i0 + 1], f);
+    ctx.globalAlpha = 1;
   }
   const ss = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
 
-  function progress() {
-    const r = journey.getBoundingClientRect();
-    return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
-  }
   function update() {
-    const p = progress();
-    target = p * (N - 1);
-    cur += (target - cur) * (window.__snap ? 1 : 0.12);
-    if (Math.abs(target - cur) < 0.01) cur = target;
-    const fi = Math.round(cur);
-    if (fi !== lastDrawn) { draw(fi); lastDrawn = fi; }
+    const y = scrollY;
+    const p = Math.min(1, Math.max(0, (y - jTop) / jLen));
+    const target = p * (N - 1);
+    cur += (target - cur) * (window.__snap ? 1 : 0.2);
+    if (Math.abs(target - cur) < 0.005) cur = target;
+    if (Math.abs(cur - drawnAt) > 0.002) { draw(cur); drawnAt = cur; }
     const q = cur / (N - 1);
-    chapters.forEach((c, i) => {
-      const a = +c.dataset.in, b = +c.dataset.out, fade = 0.05;
-      const o = i === 0 ? 1 - ss(b - fade, b, q) : ss(a, a + fade, q) * (1 - ss(b - fade, b, q));
-      const y = (1 - ss(a, a + fade, q)) * 40 - ss(b - fade, b, q) * 40;
-      c.style.opacity = o; c.style.transform = `translateY(${i === 0 ? -ss(b - fade, b, q) * 40 : y}px)`; c.style.filter = `blur(${(1 - o) * 10}px)`;
-    });
-    const seg = [0.17, 0.5, 0.75, 1]; const ci = seg.findIndex(s => q < s);
-    rail.forEach((r, i) => r.classList.toggle('on', i === ci));
-    rail[0].parentElement.style.color = q > 0.78 ? '#0b0b0d' : '#fff';
-    hint.style.opacity = 1 - ss(0.0, 0.03, q);
+    for (let i = 0; i < chapters.length; i++) {
+      const c = chapters[i], fade = 0.05;
+      const out = ss(c.b - fade, c.b, q), inn = i === 0 ? 1 : ss(c.a, c.a + fade, q);
+      const o = Math.round(inn * (1 - out) * 100) / 100, ty = Math.round(((1 - inn) * 40 - out * 40) * 10) / 10;
+      if (o !== c.o || ty !== c.y) { c.el.style.opacity = o; c.el.style.transform = `translate3d(0,${ty}px,0)`; c.el.style.visibility = o ? 'visible' : 'hidden'; c.o = o; c.y = ty; }
+    }
+    const ci = [0.17, 0.5, 0.75, 1].findIndex(s => q < s);
+    if (ci !== lastRail) { rail.forEach((r, i) => r.classList.toggle('on', i === ci)); lastRail = ci; }
+    const dark = q > 0.78; if (dark !== lastRailDark) { railBox.style.color = dark ? '#0b0b0d' : '#fff'; lastRailDark = dark; }
+    hint.style.opacity = 1 - ss(0, 0.03, q);
     wo.style.opacity = ss(0.9, 0.995, q);
-    prog.style.width = (q * 100) + '%';
-    const lz = document.getElementById('lightzone').getBoundingClientRect();
-    nav.classList.toggle('light', (q > 0.8 && lz.bottom > 60) || (lz.top < 60 && lz.bottom > 60));
+    prog.style.transform = `scaleX(${q})`;
+    const light = (q > 0.8 && y + 60 < lzBottom) || (y + 60 > lzTop && y + 60 < lzBottom);
+    if (light !== lastNav) { nav.classList.toggle('light', light); lastNav = light; }
     requestAnimationFrame(update);
   }
 
-  // frames are bundled into 10 interleaved packs (pack k = frames k, k+10, ...), so scrubbing works after the first pack
+  // frames come in 10 interleaved packs; each frame is decoded to a GPU-ready bitmap up front
   const pct = document.getElementById('pct'), barI = document.getElementById('barI');
   let started = false;
-  const start = () => { if (started) return; started = true; document.getElementById('loader').classList.add('done'); document.body.classList.remove('loading'); };
-  const tick = () => { loaded++; pct.textContent = Math.round(loaded / N * 100); barI.style.transform = `scaleX(${loaded / N})`; if (loaded >= N * 0.3) start(); };
-  fetch('packs/manifest.json').then(r => r.json()).then(async man => {
-    for (let k = 0; k < man.length; k++) {
-      const buf = await (await fetch(`packs/p${k}.webp`)).arrayBuffer();
-      man[k].forEach(([i, off, len]) => {
-        const img = new Image(); img.decoding = 'async';
-        img.onload = () => { tick(); lastDrawn = -1; }; img.onerror = tick;
-        img.src = URL.createObjectURL(new Blob([buf.slice(off, off + len)], { type: 'image/webp' }));
-        frames[i] = img;
-      });
-    }
-  }).catch(start);
-  setTimeout(start, 12000);
+  const start = () => { if (started) return; started = true; measure(); document.getElementById('loader').classList.add('done'); document.body.classList.remove('loading'); };
+  const tick = () => { loaded++; pct.textContent = Math.round(loaded / N * 100); barI.style.transform = `scaleX(${loaded / N})`; if (loaded >= N) start(); };
+  const decode = blob => window.createImageBitmap ? createImageBitmap(blob) : new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = URL.createObjectURL(blob); });
+  fetch('packs/manifest.json').then(r => r.json()).then(man => Promise.all(man.map(async (list, k) => {
+    const buf = await (await fetch(`packs/p${k}.webp`)).arrayBuffer();
+    await Promise.all(list.map(([i, off, len]) => decode(new Blob([buf.slice(off, off + len)], { type: 'image/webp' }))
+      .then(bm => { frames[i] = bm; drawnAt = -1; }).catch(() => {}).finally(tick)));
+  }))).catch(start);
+  setTimeout(start, 15000);
 
-  size(); addEventListener('resize', size);
+  measure(); addEventListener('resize', measure); addEventListener('load', measure);
   requestAnimationFrame(update);
 
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
