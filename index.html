@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NEURAVON — Intelligence, engineered.</title>
+<meta name="description" content="NEURAVON is an AI engineering studio building AI agents, automation, immersive 3D websites and SaaS platforms for businesses.">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://neuravonlabs.vercel.app/">
+<meta property="og:title" content="NEURAVON — Intelligence, engineered.">
+<meta property="og:description" content="AI agents, automation, immersive 3D websites and SaaS platforms. Scroll the journey.">
+<meta property="og:image" content="https://neuravonlabs.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://neuravonlabs.vercel.app/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +44,8 @@ nav ul a:hover{color:var(--o)}
 .pill{display:inline-flex;align-items:center;gap:10px;border:1px solid currentColor;border-radius:99px;padding:10px 18px;font-size:13px;font-weight:500;transition:.3s}
 .pill:hover{background:var(--o);border-color:var(--o);color:#fff}
 nav.light{color:var(--ink)}
+nav.solid{background:rgba(11,11,13,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding-top:14px;padding-bottom:14px}
+nav.solid.light{background:rgba(247,244,239,.82)}
 @media(max-width:760px){nav ul{display:none}}
 
 /* journey */
@@ -129,6 +142,87 @@ nav.light{color:var(--ink)}
 #cta .btn.solid{background:#fff;color:var(--ink)}#cta .btn.solid:hover{background:var(--o);color:#fff}
 footer{background:var(--ink);color:#8d877f;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;padding:30px 5vw;font-size:12px;border-top:1px solid rgba(255,255,255,.08)}
 
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(0,0,0,.12)}
+.step{padding:34px 28px 10px 0;position:relative}
+.step::before{content:"";position:absolute;top:-1px;left:0;width:0;height:2px;background:var(--o);transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.step.in::before{width:60%}
+.step .n{font-family:"Instrument Serif",serif;font-size:64px;line-height:1;color:var(--o)}
+.step h4{font-family:"Instrument Serif",serif;font-weight:400;font-size:36px;margin:18px 0 10px}
+.step p{font-size:15px;line-height:1.6;color:#55514b;max-width:240px}
+.principles{display:flex;flex-wrap:wrap;gap:12px;margin-top:56px}
+.principles span{border:1px solid rgba(0,0,0,.14);border-radius:99px;padding:12px 20px;font-size:14px;background:#fff}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr;row-gap:20px}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* founder */
+.founder{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;align-items:center}
+.plate{position:relative;border-radius:28px;overflow:hidden;background:#0b0b0d;box-shadow:0 50px 90px -40px rgba(0,0,0,.55)}
+.plate img{display:block;width:100%;height:auto}
+.plate .cap{position:absolute;left:24px;right:24px;bottom:20px;display:flex;justify-content:space-between;color:#fff;font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+.founder .k{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:12px}
+.founder .k::before{content:"";width:28px;height:1px;background:var(--o)}
+.founder h3{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.02em;margin:22px 0 18px}
+.founder .stmt{font-family:"Instrument Serif",serif;font-style:italic;font-size:34px;color:var(--o);margin-bottom:22px}
+.founder p.body{font-size:17px;line-height:1.7;color:#3d3a36;max-width:520px}
+.founder .links{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+@media(max-width:900px){.founder{grid-template-columns:1fr;gap:40px}}
+
+/* contact */
+#contact{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+#contact::before{content:"";position:absolute;left:20%;top:100%;width:1100px;height:1100px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,106,26,.38),transparent 60%);pointer-events:none}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative}
+.contact h3{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(56px,7.5vw,118px);line-height:.9;letter-spacing:-.02em}
+.contact h3 em{color:var(--o)}
+.contact .lead{margin:26px 0 36px;max-width:440px;color:#b9b3ab;line-height:1.65;font-size:16px}
+.direct{display:grid;gap:12px}
+.direct a{display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:18px 22px;transition:.3s}
+.direct a:hover{border-color:var(--o);background:rgba(255,106,26,.08)}
+.direct small{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8d877f;margin-bottom:4px}
+.direct b{font-weight:500;font-size:16px}
+.direct i{font-style:normal;color:var(--o);font-size:20px}
+form.cf{background:#141416;border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:34px;display:grid;gap:16px}
+.cf label{display:grid;gap:8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8d877f}
+.cf input,.cf select,.cf textarea{font:inherit;font-size:16px;letter-spacing:0;text-transform:none;color:#fff;background:#0b0b0d;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:15px 16px;outline:none;transition:border-color .3s;width:100%}
+.cf textarea{min-height:130px;resize:vertical}
+.cf input:focus,.cf select:focus,.cf textarea:focus{border-color:var(--o)}
+.cf .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chipsel{display:flex;flex-wrap:wrap;gap:8px}
+.chipsel button{font:inherit;font-size:14px;color:#d8d2ca;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:10px 16px;cursor:pointer;transition:.25s}
+.chipsel button[aria-pressed=true]{background:var(--o);border-color:var(--o);color:#fff}
+.cf .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.cf .acts .btn{border:0;cursor:pointer;font:inherit;font-size:15px;font-weight:500}
+.btn.wa{background:var(--o);color:#fff}.btn.wa:hover{background:#ff7f38}
+.btn.em{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25)!important}.btn.em:hover{border-color:var(--o)!important;color:var(--o)}
+.cf .note{font-size:13px;color:#8d877f;line-height:1.5}
+.cf .err{color:#ff8a5c;font-size:13px;min-height:1em}
+@media(max-width:900px){.contact{grid-template-columns:1fr;gap:44px}.cf .row{grid-template-columns:1fr}form.cf{padding:24px}}
+
+/* case study modal */
+.proj{cursor:pointer;text-align:left}
+.cs{position:fixed;inset:0;z-index:90;display:none}
+.cs.open{display:block}
+.cs .bg{position:absolute;inset:0;background:rgba(5,5,6,.72);backdrop-filter:blur(6px);opacity:0;transition:opacity .4s}
+.cs.show .bg{opacity:1}
+.cs .panel{position:absolute;right:0;top:0;bottom:0;width:min(880px,100%);background:var(--cream);color:var(--ink);overflow-y:auto;transform:translateX(100%);transition:transform .55s cubic-bezier(.2,.7,.2,1);padding:clamp(24px,5vw,64px);-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.cs.show .panel{transform:none}
+.cs .close{position:sticky;top:0;float:right;width:48px;height:48px;border-radius:50%;border:1px solid rgba(0,0,0,.15);background:#fff;font-size:20px;cursor:pointer;z-index:2}
+.cs .tag{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);display:flex;gap:10px;align-items:center}
+.cs .tag b{width:6px;height:6px;border-radius:50%;background:var(--o)}
+.cs h4{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(56px,8vw,96px);line-height:.95;margin:14px 0 18px}
+.cs .intro{font-size:18px;line-height:1.65;color:#3d3a36;max-width:620px}
+.cs .shots2{display:grid;gap:18px;margin:36px 0}
+.cs .shots2 img{width:100%;border-radius:16px;box-shadow:0 30px 60px -32px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.08);display:block}
+.cs .cols{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-bottom:36px}
+.cs h5{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--o);margin-bottom:12px;font-weight:600}
+.cs .cols p{font-size:15px;line-height:1.7;color:#3d3a36}
+.cs ul.feat{list-style:none;display:grid;gap:10px}
+.cs ul.feat li{font-size:15px;line-height:1.5;padding-left:22px;position:relative;color:#3d3a36}
+.cs ul.feat li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:1px;background:var(--o)}
+@media(max-width:700px){.cs .cols{grid-template-columns:1fr}}
+body.modal{overflow:hidden}
+
 .rv{opacity:0;transform:translateY(40px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
 </style>
@@ -139,7 +233,7 @@ footer{background:var(--ink);color:#8d877f;display:flex;justify-content:space-be
 
 <nav id="nav">
   <a class="logo" href="#top"><b></b>NEURAVON</a>
-  <ul><li><a href="#services">Services</a></li><li><a href="#work">Work</a></li><li><a href="#contact">Contact</a></li></ul>
+  <ul><li><a href="#services">Services</a></li><li><a href="#work">Work</a></li><li><a href="#process">Process</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
   <a class="pill" href="#contact">Start a project</a>
 </nav>
 
@@ -200,44 +294,105 @@ footer{background:var(--ink);color:#8d877f;display:flex;justify-content:space-be
   <section class="wrap" id="work" style="padding-top:20px">
     <div class="sec-head rv"><h3>Selected<br>work</h3><span>Portfolio</span></div>
     <div class="work">
-      <a class="proj feat rv" href="https://mailok-liard.vercel.app/" target="_blank" rel="noopener">
+      <div class="proj feat rv" role="button" tabindex="0" data-cs="mailok">
         <div class="frame"><div class="bar"><i></i><i></i><i></i><span>mailok-liard.vercel.app</span></div><div class="shots"><img src="work/mailok-1.webp" alt="MailOK homepage" loading="lazy"><img src="work/mailok-2.webp" alt="MailOK inside page" loading="lazy"></div></div>
-        <div class="meta"><div class="tag"><b></b>Our product · Website monitoring SaaS</div><h5>MailOK</h5><p>Website care for agencies. One screen that watches every client site from the outside for uptime, security holes, speed, SSL, domain expiry and email delivery, with nothing to install.</p><span class="visit">Visit mailok-liard.vercel.app ↗</span></div>
-      </a>
-      <a class="proj rv" href="https://lbauto24.com/en" target="_blank" rel="noopener">
+        <div class="meta"><div class="tag"><b></b>Our product · Website monitoring SaaS</div><h5>MailOK</h5><p>Website care for agencies. One screen that watches every client site from the outside for uptime, security holes, speed, SSL, domain expiry and email delivery, with nothing to install.</p><span class="visit">View case study →</span></div>
+      </div>
+      <div class="proj rv" role="button" tabindex="0" data-cs="lbauto24">
         <div class="frame"><div class="bar"><i></i><i></i><i></i><span>lbauto24.com</span></div><div class="shots"><img src="work/lbauto24-1.webp" alt="LBauto24 homepage" loading="lazy"><img src="work/lbauto24-2.webp" alt="LBauto24 inside page" loading="lazy"></div></div>
-        <div class="meta"><div class="tag"><b></b>Platform · Car marketplace</div><h5>LBauto24</h5><p>The car marketplace of North Macedonia. Dealers and private sellers, search by make, price and customs status, in Macedonian, Albanian and English.</p><span class="visit">Visit lbauto24.com ↗</span></div>
-      </a>
-      <a class="proj rv" href="https://flyesim.me/" target="_blank" rel="noopener">
+        <div class="meta"><div class="tag"><b></b>Platform · Car marketplace</div><h5>LBauto24</h5><p>The car marketplace of North Macedonia. Dealers and private sellers, search by make, price and customs status, in Macedonian, Albanian and English.</p><span class="visit">View case study →</span></div>
+      </div>
+      <div class="proj rv" role="button" tabindex="0" data-cs="flyesim">
         <div class="frame"><div class="bar"><i></i><i></i><i></i><span>flyesim.me</span></div><div class="shots"><img src="work/flyesim-1.webp" alt="FlyEsim homepage" loading="lazy"><img src="work/flyesim-2.webp" alt="FlyEsim inside page" loading="lazy"></div></div>
-        <div class="meta"><div class="tag"><b></b>Platform · eSIM commerce</div><h5>FlyEsim</h5><p>Travel eSIM data plans for destinations worldwide. Pick a plan, scan a QR code and get online on landing, without a physical SIM.</p><span class="visit">Visit flyesim.me ↗</span></div>
-      </a>
-      <a class="proj rv" href="https://orihost.com/" target="_blank" rel="noopener">
+        <div class="meta"><div class="tag"><b></b>Platform · eSIM commerce</div><h5>FlyEsim</h5><p>Travel eSIM data plans for destinations worldwide. Pick a plan, scan a QR code and get online on landing, without a physical SIM.</p><span class="visit">View case study →</span></div>
+      </div>
+      <div class="proj rv" role="button" tabindex="0" data-cs="orihost">
         <div class="frame"><div class="bar"><i></i><i></i><i></i><span>orihost.com</span></div><div class="shots"><img src="work/orihost-1.webp" alt="Orihost homepage" loading="lazy"><img src="work/orihost-2.webp" alt="Orihost inside page" loading="lazy"></div></div>
-        <div class="meta"><div class="tag"><b></b>Platform · Hosting</div><h5>Orihost</h5><p>Hosting for Discord bots, Minecraft servers, Node.js apps, websites and Lavalink, with tiered plans and a self-serve deploy flow.</p><span class="visit">Visit orihost.com ↗</span></div>
-      </a>
-      <a class="proj rv" href="https://growthx.site/" target="_blank" rel="noopener">
+        <div class="meta"><div class="tag"><b></b>Platform · Hosting</div><h5>Orihost</h5><p>Hosting for Discord bots, Minecraft servers, Node.js apps, websites and Lavalink, with tiered plans and a self-serve deploy flow.</p><span class="visit">View case study →</span></div>
+      </div>
+      <div class="proj rv" role="button" tabindex="0" data-cs="growthx">
         <div class="frame"><div class="bar"><i></i><i></i><i></i><span>growthx.site</span></div><div class="shots"><img src="work/growthx-1.webp" alt="GrowthX homepage" loading="lazy"><img src="work/growthx-2.webp" alt="GrowthX inside page" loading="lazy"></div></div>
-        <div class="meta"><div class="tag"><b></b>Website · Agency</div><h5>GrowthX</h5><p>A bold, high-contrast website for a web design and development agency, built to load fast and present work with confidence.</p><span class="visit">Visit growthx.site ↗</span></div>
-      </a>
+        <div class="meta"><div class="tag"><b></b>Website · Agency</div><h5>GrowthX</h5><p>A bold, high-contrast website for a web design and development agency, built to load fast and present work with confidence.</p><span class="visit">View case study →</span></div>
+      </div>
       <div class="lab rv">
         <div><div class="tag">In development · Our product</div><h5>NEURAVON Agent OS</h5><p>A platform where businesses build, run and monitor their own AI agents, in an immersive holographic workspace with a full operational dashboard.</p></div>
         <div class="chips"><span>Customer Support</span><span>Research &amp; Analyst</span><span>Developer</span><span>Sales &amp; Lead Generation</span><span>Workflow Automation</span><span>Marketing &amp; Content</span><span>AURA · Social intelligence</span></div>
       </div>
     </div>
   </section>
+
+  <section class="wrap" id="process">
+    <div class="sec-head rv"><h3>How we<br>work</h3><span>Process</span></div>
+    <div class="steps">
+      <div class="step rv"><div class="n">01</div><h4>Discover</h4><p>Understand the problem, the users and the goals behind the project.</p></div>
+      <div class="step rv"><div class="n">02</div><h4>Architect</h4><p>Plan the solution and the technical approach before writing code.</p></div>
+      <div class="step rv"><div class="n">03</div><h4>Engineer</h4><p>Build with precision and performance, with progress you can see.</p></div>
+      <div class="step rv"><div class="n">04</div><h4>Refine</h4><p>Test, optimize and polish until it's ready to launch.</p></div>
+    </div>
+    <div class="principles rv"><span>Automate what should not be manual</span><span>Make complexity useful</span><span>Design for performance</span></div>
+  </section>
+
+  <section class="wrap" id="about" style="padding-top:40px">
+    <div class="founder">
+      <div class="plate rv"><img src="founder.webp" srcset="founder-720.webp 720w, founder.webp 1200w" sizes="(max-width:900px) 90vw, 40vw" width="1200" height="1500" loading="lazy" alt="Portrait of Leotrim Misini, founder of NEURAVON, half photographed and half rendered as glowing data lines"><div class="cap"><span>Leotrim Misini</span><span>Founder</span></div></div>
+      <div>
+        <div class="k rv">About the founder</div>
+        <h3 class="rv">Leotrim<br>Misini</h3>
+        <div class="stmt rv">Behind the code. Beyond limits.</div>
+        <p class="body rv">Computer Science and Artificial Intelligence student building real software products and exploring the possibilities of intelligent systems. NEURAVON is where that work meets businesses that want to move faster, with AI agents, automation and websites people remember.</p>
+        <div class="links rv"><a class="btn solid" href="#contact">Work with me <span class="arr">→</span></a><a class="btn ghost" href="https://www.instagram.com/neuravonlabs/" target="_blank" rel="noopener">@neuravonlabs</a></div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <section id="contact">
-  <div id="cta">
-    <h3 class="rv">Let's build<br>what comes <em>next.</em></h3>
-    <p class="rv">Tell us about your idea. We'll reply within 24 hours with how we'd build it.</p>
-    <div class="btns rv">
-      <a class="btn solid" href="https://www.instagram.com/neuravonlabs/" target="_blank" rel="noopener">DM us on Instagram <span class="arr">→</span></a>
+  <div class="wrap" style="padding-top:140px;padding-bottom:120px">
+    <div class="contact">
+      <div>
+        <h3 class="rv">Let's build<br>what comes <em>next.</em></h3>
+        <p class="lead rv">Tell us about your idea. We reply within 24 hours with how we'd build it, a timeline and a price.</p>
+        <div class="direct rv">
+          <a href="https://wa.me/355685500511" target="_blank" rel="noopener"><span><small>WhatsApp</small><b>+355 68 550 0511</b></span><i>→</i></a>
+          <a href="mailto:leutrimmisini3@gmail.com"><span><small>Email</small><b>leutrimmisini3@gmail.com</b></span><i>→</i></a>
+          <a href="https://www.instagram.com/neuravonlabs/" target="_blank" rel="noopener"><span><small>Instagram</small><b>@neuravonlabs</b></span><i>→</i></a>
+        </div>
+      </div>
+      <form class="cf rv" id="cf" novalidate>
+        <div class="row">
+          <label>Your name<input name="name" autocomplete="name" placeholder="Name" required></label>
+          <label>Business<input name="biz" autocomplete="organization" placeholder="Company (optional)"></label>
+        </div>
+        <label>What do you need?</label>
+        <div class="chipsel" id="needs">
+          <button type="button" aria-pressed="false">AI agent</button><button type="button" aria-pressed="false">3D website</button><button type="button" aria-pressed="false">Automation</button><button type="button" aria-pressed="false">SaaS / platform</button><button type="button" aria-pressed="false">Not sure yet</button>
+        </div>
+        <label>Tell us about the project<textarea name="msg" placeholder="What are you building, and what should it do for your business?" required></textarea></label>
+        <div class="err" id="cferr" aria-live="polite"></div>
+        <div class="acts">
+          <button class="btn wa" type="submit">Send on WhatsApp <span class="arr" style="background:#fff;color:var(--o)">→</span></button>
+          <button class="btn em" type="button" id="cfmail">Send by email</button>
+        </div>
+        <p class="note">Your message opens ready to send in WhatsApp or your email app. Nothing is stored on this site.</p>
+      </form>
     </div>
   </div>
-  <footer><span>© 2026 NEURAVON. Intelligence, engineered.</span><span>leutrimmisini3@gmail.com · @neuravonlabs</span></footer>
+  <footer><span>© 2026 NEURAVON. Intelligence, engineered.</span><span>+355 68 550 0511 · @neuravonlabs</span></footer>
 </section>
+
+<div class="cs" id="cs" aria-hidden="true">
+  <div class="bg" data-close></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="csTitle">
+    <button class="close" data-close aria-label="Close case study">✕</button>
+    <div class="tag"><b></b><span id="csTag"></span></div>
+    <h4 id="csTitle"></h4>
+    <p class="intro" id="csIntro"></p>
+    <div class="shots2"><img id="csImg1" alt=""><img id="csImg2" alt=""></div>
+    <div class="cols"><div><h5>The challenge</h5><p id="csChal"></p></div><div><h5>What we built</h5><ul class="feat" id="csFeat"></ul></div></div>
+    <div class="btns" style="justify-content:flex-start"><a class="btn solid" id="csVisit" target="_blank" rel="noopener">Visit live site <span class="arr">↗</span></a><a class="btn ghost" href="#contact" data-close>Start a similar project</a></div>
+  </div>
+</div>
+
 
 <script>
 (() => {
@@ -248,7 +403,7 @@ footer{background:var(--ink);color:#8d877f;display:flex;justify-content:space-be
   const rail = [...document.querySelectorAll('#rail div')], railBox = rail[0].parentElement;
   const hint = document.getElementById('hint'), wo = document.getElementById('whiteout'), prog = document.getElementById('progress'), nav = document.getElementById('nav');
   let loaded = 0, cur = 0, target = 0, drawnAt = -1, jTop = 0, jLen = 1, lzTop = 0, lzBottom = 0, vh = innerHeight;
-  let lastRail = -2, lastNav = null, lastRailDark = null;
+  let lastRail = -2, lastNav = null, lastRailDark = null, lastSolid = null;
 
   function measure() {
     vh = innerHeight;
@@ -323,6 +478,7 @@ footer{background:var(--ink);color:#8d877f;display:flex;justify-content:space-be
     prog.style.transform = `scaleX(${q})`;
     const light = (q > 0.8 && y + 60 < lzBottom) || (y + 60 > lzTop && y + 60 < lzBottom);
     if (light !== lastNav) { nav.classList.toggle('light', light); lastNav = light; }
+    const solid = y > jTop + jLen + 20; if (solid !== lastSolid) { nav.classList.toggle('solid', solid); lastSolid = solid; }
     requestAnimationFrame(update);
   }
 
@@ -341,6 +497,69 @@ footer{background:var(--ink);color:#8d877f;display:flex;justify-content:space-be
 
   measure(); addEventListener('resize', measure); addEventListener('load', measure);
   requestAnimationFrame(update);
+
+
+  // ----- case studies -----
+  const CS = {
+    mailok: { tag: 'Our product · Website monitoring SaaS', name: 'MailOK', url: 'https://mailok-liard.vercel.app/',
+      intro: 'Website care for agencies: one screen that watches every client site from the outside, with nothing to install.',
+      chal: 'Agencies look after dozens of client websites, and problems usually surface when a client calls: the site is down, the SSL expired, emails land in spam. Checking every site by hand doesn’t scale.',
+      feat: ['Uptime, security, speed and SSL checks for every site', 'Domain expiry and email delivery monitoring', 'WordPress plugin and Google health checks', 'One overview with a health score per site', 'Free instant website check, no sign-up', 'Works on any website, no plugin needed'] },
+    lbauto24: { tag: 'Platform · Car marketplace', name: 'LBauto24', url: 'https://lbauto24.com/en',
+      intro: 'The car marketplace of North Macedonia, for dealers and private sellers.',
+      chal: 'Buyers needed one trustworthy place to search used and new cars across the country, with the details that matter locally, like customs status, in the languages people actually speak.',
+      feat: ['Search by make, model, price, mileage, year and 30+ details', 'Customs status filter for the local market', 'Cars and motorcycles, dealers and private sellers', 'Browse by body type, price range and popular makes', 'Macedonian, Albanian and English', 'Admin panel for listings and dealers'] },
+    flyesim: { tag: 'Platform · eSIM commerce', name: 'FlyEsim', url: 'https://flyesim.me/',
+      intro: 'Travel eSIM data plans for 200+ destinations, priced for travelers.',
+      chal: 'Roaming is expensive and buying local SIM cards abroad wastes time. Travelers need data that works the moment they land, at a clear price.',
+      feat: ['eSIM plans for 200+ countries and regions', 'Destination search with prices from the first screen', 'Three-step flow: choose a plan, scan the QR code, go online', '5G-ready plans with no roaming surprises', 'Accounts, cart and checkout', 'Multi-language storefront'] },
+    orihost: { tag: 'Platform · Hosting', name: 'Orihost', url: 'https://orihost.com/',
+      intro: 'Hosting for Discord bots, Minecraft servers, Node.js apps, websites and Lavalink.',
+      chal: 'Bot developers and gamers want reliable servers without enterprise prices or a complicated setup.',
+      feat: ['Bot, Minecraft, Node.js, website and Lavalink hosting', 'Tiered plans starting at €1/month', 'Interactive plan picker with live specs', 'DDoS protection, daily backups, SFTP and databases', 'Status page and multi-language site', 'Self-serve deploy flow'] },
+    growthx: { tag: 'Website · Agency', name: 'GrowthX', url: 'https://growthx.site/',
+      intro: 'A bold, high-contrast website for a web design and development agency.',
+      chal: 'An agency selling websites needs its own site to prove it: fast, memorable and clear about what it offers.',
+      feat: ['Bold editorial typography and motion', 'Services marquee and value pillars', 'Pricing and portfolio pages', 'Fast-loading, responsive build', 'Clear calls to action throughout'] }
+  };
+  const cs = document.getElementById('cs'); let lastFocus = null;
+  const $ = id => document.getElementById(id);
+  function openCS(id) {
+    const d = CS[id]; if (!d) return; lastFocus = document.activeElement;
+    $('csTag').textContent = d.tag; $('csTitle').textContent = d.name; $('csIntro').textContent = d.intro; $('csChal').textContent = d.chal;
+    $('csFeat').innerHTML = d.feat.map(f => `<li>${f}</li>`).join('');
+    $('csImg1').src = `work/${id}-1.webp`; $('csImg1').alt = `${d.name} homepage`; $('csImg2').src = `work/${id}-2.webp`; $('csImg2').alt = `${d.name} inside page`;
+    $('csVisit').href = d.url;
+    cs.classList.add('open'); cs.setAttribute('aria-hidden', 'false'); document.body.classList.add('modal');
+    cs.querySelector('.panel').scrollTop = 0;
+    requestAnimationFrame(() => requestAnimationFrame(() => cs.classList.add('show')));
+    setTimeout(() => cs.querySelector('.close').focus(), 50);
+  }
+  function closeCS() {
+    cs.classList.remove('show'); cs.setAttribute('aria-hidden', 'true'); document.body.classList.remove('modal');
+    setTimeout(() => cs.classList.remove('open'), 450); if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('.proj[data-cs]').forEach(el => {
+    el.addEventListener('click', () => openCS(el.dataset.cs));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCS(el.dataset.cs); } });
+  });
+  cs.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeCS));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && cs.classList.contains('open')) closeCS(); });
+
+  // ----- contact form -> WhatsApp / email -----
+  const PHONE = '355685500511', MAIL = 'leutrimmisini3@gmail.com';
+  const form = $('cf'), needs = [...document.querySelectorAll('#needs button')];
+  needs.forEach(b => b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true')));
+  function compose() {
+    const f = new FormData(form), name = (f.get('name') || '').trim(), msg = (f.get('msg') || '').trim(), biz = (f.get('biz') || '').trim();
+    if (!name || !msg) { $('cferr').textContent = 'Please add your name and a few words about the project.'; return null; }
+    $('cferr').textContent = '';
+    const picked = needs.filter(b => b.getAttribute('aria-pressed') === 'true').map(b => b.textContent);
+    return `Hi NEURAVON! I'm ${name}${biz ? ' from ' + biz : ''}.` + (picked.length ? `\nI'm interested in: ${picked.join(', ')}.` : '') + `\n\n${msg}`;
+  }
+  function go(url) { const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); }
+  form.addEventListener('submit', e => { e.preventDefault(); const t = compose(); if (t) go(`https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`); });
+  $('cfmail').addEventListener('click', () => { const t = compose(); if (t) location.href = `mailto:${MAIL}?subject=${encodeURIComponent('New project for NEURAVON')}&body=${encodeURIComponent(t)}`; });
 
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
   document.querySelectorAll('.rv').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 0.08 + 's'; io.observe(el); });
